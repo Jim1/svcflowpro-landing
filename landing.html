@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Job Pro — The CRM Built for Home Service Businesses</title>
+  <meta name="description" content="Stop losing leads. Service Job Pro automatically follows up with every lead, tracks your ad ROI, and runs your entire home service business from one dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:     #0a0a0f;
+      --ink2:    #1c1c28;
+      --mid:     #4a4a5e;
+      --muted:   #8888a0;
+      --border:  #e8e8f0;
+      --light:   #f7f7fc;
+      --white:   #ffffff;
+      --blue:    #2251f5;
+      --blue2:   #1a3fd4;
+      --blue-lt: #eff3ff;
+      --green:   #00c48c;
+      --amber:   #f59e0b;
+      --red:     #ef4444;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ NAV ══════════════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all .3s;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--ink);
+      letter-spacing: -0.4px;
+    }
+
+    .nav-logo-mark {
+      width: 34px; height: 34px;
+      background: var(--blue);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px; font-weight: 500;
+      color: var(--mid); text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta { display: flex; align-items: center; gap: 10px; }
+
+    .btn-ghost {
+      font-size: 14px; font-weight: 600;
+      color: var(--ink); text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      transition: all .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-ghost:hover { border-color: var(--ink); }
+
+    .btn-primary {
+      font-size: 14px; font-weight: 600;
+      color: white; background: var(--blue);
+      text-decoration: none;
+      padding: 9px 22px;
+      border-radius: 8px;
+      transition: all .25s;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary:hover {
+      background: var(--blue2);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(34,81,245,0.3);
+    }
+
+    /* ══ HERO ═════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex; align-items: center;
+      padding: 100px 48px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(34,81,245,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,196,140,0.08) 0%, transparent 60%);
+    }
+
+    .hero-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      position: relative; z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(34,81,245,0.15);
+      border: 1px solid rgba(34,81,245,0.3);
+      border-radius: 100px;
+      padding: 5px 14px 5px 8px;
+      font-size: 12px; font-weight: 600;
+      color: #7fa4ff;
+      margin-bottom: 28px;
+      letter-spacing: 0.2px;
+    }
+
+    .hero-badge-dot {
+      width: 20px; height: 20px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+    }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(40px, 4.5vw, 64px);
+      font-weight: 800;
+      color: white;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .accent { color: var(--blue); }
+    .hero h1 .accent-green { color: var(--green); }
+
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,0.55);
+      line-height: 1.75; margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 14px;
+      flex-wrap: wrap; margin-bottom: 48px;
+    }
+
+    .btn-hero {
+      background: var(--blue); color: white;
+      text-decoration: none;
+      font-size: 15px; font-weight: 600;
+      padding: 15px 32px;
+      border-radius: 10px;
+      transition: all .3s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 0 0 0 rgba(34,81,245,0.4);
+    }
+    .btn-hero:hover {
+      background: var(--blue2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(34,81,245,0.4);
+    }
+
+    .btn-hero-outline {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 15px; font-weight: 500;
+      padding: 15px 28px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      transition: all .2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-hero-outline:hover {
+      border-color: rgba(255,255,255,0.35);
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-trust {
+      display: flex; flex-wrap: wrap; gap: 20px;
+    }
+
+    .hero-trust-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .trust-check {
+      width: 18px; height: 18px;
+      background: rgba(0,196,140,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--green);
+    }
+
+    /* ── HERO VISUAL (dashboard mock) ── */
+    .hero-visual {
+      position: relative;
+      padding-bottom: 40px;
+    }
+
+    .dash-mock {
+      background: #141420;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(34,81,245,0.15);
+    }
+
+    .dash-topbar {
+      background: #1a1a2e;
+      padding: 12px 20px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dash-dot-r { background: #ff5f57; }
+    .dash-dot-y { background: #febc2e; }
+    .dash-dot-g { background: #28c840; }
+
+    .dash-url {
+      margin-left: 12px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 11px; color: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dash-body {
+      display: grid; grid-template-columns: 180px 1fr;
+    }
+
+    .dash-sidebar {
+      background: #111120;
+      padding: 20px 0;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .dash-nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 16px;
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.35);
+      cursor: default;
+    }
+
+    .dash-nav-item.active {
+      color: white;
+      background: rgba(34,81,245,0.2);
+      border-right: 2px solid var(--blue);
+    }
+
+    .dash-nav-dot { font-size: 14px; }
+
+    .dash-content { padding: 20px; }
+
+    .dash-stats {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .dash-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .dash-stat-label { font-size: 10px; color: rgba(255,255,255,0.35); margin-bottom: 6px; font-weight: 500; }
+    .dash-stat-val { font-size: 22px; font-weight: 700; color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .dash-stat-sub { font-size: 10px; color: var(--green); margin-top: 2px; }
+
+    .dash-leads { display: flex; flex-direction: column; gap: 0; }
+
+    .dash-lead-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .dash-lead-row:last-child { border-bottom: none; }
+
+    .dash-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0;
+    }
+
+    .dash-lead-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85); }
+    .dash-lead-svc  { font-size: 10px; color: rgba(255,255,255,0.3); }
+
+    .dash-badge {
+      margin-left: auto;
+      font-size: 9px; font-weight: 700;
+      padding: 2px 8px; border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-new  { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .badge-hot  { background: rgba(239,68,68,0.15);  color: #ef4444; }
+    .badge-won  { background: rgba(0,196,140,0.15);  color: var(--green); }
+    .badge-ai   { background: rgba(34,81,245,0.15);  color: #7fa4ff; }
+
+    .dash-notification {
+      position: absolute;
+      right: -24px; bottom: 60px;
+      background: white;
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+      display: flex; align-items: center; gap: 10px;
+      white-space: nowrap;
+      animation: floatUp 3s ease-in-out infinite;
+    }
+
+    .notif-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: var(--blue-lt);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+
+    .notif-label { font-size: 11px; color: var(--muted); }
+    .notif-val   { font-size: 13px; font-weight: 700; color: var(--ink); }
+
+    .dash-notification2 {
+      position: absolute;
+      left: -28px; top: 40px;
+      background: var(--ink);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+      display: flex; align-items: center; gap: 10px;
+      white-space: nowrap;
+      animation: floatUp 3s ease-in-out infinite .8s;
+    }
+
+    .notif2-icon { font-size: 20px; }
+    .notif2-label { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .notif2-val   { font-size: 13px; font-weight: 700; color: white; }
+
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    /* ══ SOCIAL PROOF BAR ══════════════════════════════════════ */
+    .proof-bar {
+      background: var(--light);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center;
+      justify-content: center; gap: 0;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    .proof-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 0 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .proof-item:last-child { border-right: none; }
+
+    .proof-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .proof-val {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px; font-weight: 700;
+      color: var(--ink);
+    }
+
+    .proof-label {
+      font-size: 13px; color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ══ PROBLEM SECTION ═══════════════════════════════════════ */
+    .problem-section {
+      padding: 100px 48px;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(30px, 3vw, 46px);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 18px;
+    }
+
+    .section-sub {
+      font-size: 17px; color: var(--muted);
+      line-height: 1.7; max-width: 520px;
+    }
+
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 24px; margin-top: 56px;
+    }
+
+    .problem-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+    }
+
+    .problem-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px; font-weight: 800;
+      color: rgba(239,68,68,0.15);
+      line-height: 1; margin-bottom: 12px;
+    }
+
+    .problem-title {
+      font-size: 16px; font-weight: 700;
+      color: var(--ink); margin-bottom: 8px;
+    }
+
+    .problem-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ══ FEATURES ══════════════════════════════════════════════ */
+    .features-section {
+      background: var(--ink);
+      padding: 100px 48px;
+      position: relative; overflow: hidden;
+    }
+
+    .features-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(34,81,245,0.12) 0%, transparent 70%);
+    }
+
+    .features-inner {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 2;
+    }
+
+    .features-inner .eyebrow { color: #7fa4ff; }
+    .features-inner .section-title { color: white; }
+    .features-inner .section-sub { color: rgba(255,255,255,0.45); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 2px;
+      margin-top: 56px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .feature-cell {
+      background: #0f0f1e;
+      padding: 36px;
+      transition: background .25s;
+      position: relative;
+    }
+
+    .feature-cell:hover { background: #15152a; }
+
+    .feature-cell-icon {
+      font-size: 32px; margin-bottom: 18px;
+      display: block;
+    }
+
+    .feature-cell-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: white; margin-bottom: 10px;
+    }
+
+    .feature-cell-desc {
+      font-size: 14px; color: rgba(255,255,255,0.4);
+      line-height: 1.65;
+    }
+
+    .feature-cell-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 16px;
+      font-size: 11px; font-weight: 600;
+      color: #7fa4ff;
+      background: rgba(34,81,245,0.12);
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+
+    /* ══ HOW IT WORKS ══════════════════════════════════════════ */
+    .how-section {
+      padding: 100px 48px;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .steps-wrap {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 40px; margin-top: 64px;
+      position: relative;
+    }
+
+    .steps-wrap::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 60px; right: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      z-index: 0;
+    }
+
+    .step {
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 0 4px var(--white), 0 0 0 6px var(--border);
+    }
+
+    .step-num.done { background: var(--green); }
+
+    .step-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .step-desc  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ══ COMPARISON ════════════════════════════════════════════ */
+    .compare-section {
+      background: var(--light);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 100px 48px;
+    }
+
+    .compare-inner { max-width: 1000px; margin: 0 auto; }
+
+    .compare-table {
+      margin-top: 56px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .compare-head {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      background: var(--ink);
+      padding: 16px 24px;
+      gap: 12px;
+    }
+
+    .compare-head-cell {
+      font-size: 12px; font-weight: 700;
+      text-align: center; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3px;
+    }
+
+    .compare-head-cell.ours { color: white; }
+    .compare-head-ours-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 4px;
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      padding: 14px 24px; gap: 12px;
+      background: white;
+      border-top: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .compare-row:nth-child(even) { background: var(--light); }
+
+    .compare-feature { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .compare-cell { text-align: center; font-size: 16px; }
+    .compare-cell.ours { font-weight: 700; color: var(--green); font-size: 18px; }
+    .compare-x { color: var(--red); }
+    .compare-partial { color: var(--amber); font-size: 13px; font-weight: 600; }
+
+    /* ══ PRICING ═══════════════════════════════════════════════ */
+    .pricing-section { padding: 100px 48px; }
+    .pricing-inner { max-width: 1200px; margin: 0 auto; }
+
+    .pricing-toggle {
+      display: inline-flex;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      margin: 32px 0 56px;
+      gap: 4px;
+    }
+
+    .toggle-btn {
+      padding: 8px 20px;
+      border-radius: 7px;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .2s;
+      border: none; background: none;
+      color: var(--muted); font-family: 'Inter', sans-serif;
+    }
+
+    .toggle-btn.active {
+      background: white;
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .pricing-card {
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      background: white;
+      transition: all .3s;
+    }
+
+    .pricing-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+
+    .pricing-card.popular {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(34,81,245,0.08);
+    }
+
+    .popular-pill {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue); color: white;
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 16px; border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plan-tier {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+
+    .plan-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px; font-weight: 800;
+      color: var(--ink); margin-bottom: 6px;
+    }
+
+    .plan-tagline {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.5; margin-bottom: 24px;
+      min-height: 40px;
+    }
+
+    .plan-price-wrap { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+
+    .plan-dollar { font-size: 22px; font-weight: 700; color: var(--ink); }
+
+    .plan-price {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px; font-weight: 800;
+      color: var(--ink); line-height: 1;
+    }
+
+    .plan-period { font-size: 14px; color: var(--muted); }
+    .plan-save   { font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 24px; min-height: 18px; }
+
+    .plan-cta {
+      display: block; width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 14px; font-weight: 700;
+      text-align: center; text-decoration: none;
+      transition: all .25s;
+      margin-bottom: 28px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer; border: none;
+    }
+
+    .plan-cta-outline {
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      background: none;
+    }
+    .plan-cta-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    .plan-cta-blue {
+      background: var(--blue); color: white;
+    }
+    .plan-cta-blue:hover {
+      background: var(--blue2);
+      box-shadow: 0 8px 24px rgba(34,81,245,0.3);
+    }
+
+    .plan-cta-dark {
+      background: var(--ink); color: white;
+    }
+    .plan-cta-dark:hover { background: var(--ink2); }
+
+    .plan-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .plan-features { display: flex; flex-direction: column; gap: 10px; }
+
+    .plan-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: var(--mid);
+    }
+
+    .plan-check { color: var(--green); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .plan-cross { color: var(--border); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ══ TESTIMONIALS ══════════════════════════════════════════ */
+    .testimonials-section {
+      background: var(--light);
+      border-top: 1px solid var(--border);
+      padding: 100px 48px;
+    }
+
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 24px; margin-top: 56px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .testimonial-stars { color: #f59e0b; font-size: 16px; margin-bottom: 18px; letter-spacing: 2px; }
+    .testimonial-quote { font-size: 15px; color: var(--ink); line-height: 1.7; margin-bottom: 24px; font-weight: 400; }
+    .testimonial-quote strong { font-weight: 700; }
+
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .testimonial-biz  { font-size: 12px; color: var(--muted); }
+
+    .testimonial-result {
+      position: absolute; top: 24px; right: 24px;
+      background: var(--blue-lt);
+      border-radius: 8px; padding: 8px 14px;
+      text-align: center;
+    }
+    .testimonial-result-val { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 800; color: var(--blue); }
+    .testimonial-result-label { font-size: 10px; color: var(--muted); font-weight: 600; }
+
+    /* ══ FAQ ═══════════════════════════════════════════════════ */
+    .faq-section {
+      padding: 100px 48px;
+      max-width: 800px; margin: 0 auto;
+    }
+
+    .faq-list { margin-top: 56px; }
+
+    .faq-item {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .faq-q {
+      font-size: 16px; font-weight: 700;
+      color: var(--ink); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+    }
+
+    .faq-icon { font-size: 20px; color: var(--muted); flex-shrink: 0; transition: transform .25s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--blue); }
+
+    .faq-a {
+      font-size: 15px; color: var(--muted);
+      line-height: 1.7; margin-top: 14px;
+      display: none;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+
+    /* ══ CTA SECTION ═══════════════════════════════════════════ */
+    .cta-section {
+      background: var(--blue);
+      padding: 100px 48px;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+
+    .cta-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(255,255,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 50%, rgba(0,0,0,0.1) 0%, transparent 60%);
+    }
+
+    .cta-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .cta-inner { position: relative; z-index: 2; }
+
+    .cta-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 20px;
+    }
+
+    .cta-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800; color: white;
+      line-height: 1.1; letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .cta-sub {
+      font-size: 17px; color: rgba(255,255,255,0.6);
+      max-width: 500px; margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .cta-actions {
+      display: flex; justify-content: center;
+      gap: 14px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn-cta-white {
+      background: white; color: var(--blue);
+      text-decoration: none;
+      font-size: 15px; font-weight: 700;
+      padding: 16px 36px; border-radius: 10px;
+      transition: all .25s;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn-cta-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+    }
+
+    .btn-cta-ghost {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 15px; font-weight: 500;
+      padding: 16px 28px; border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      transition: all .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-cta-ghost:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: white;
+    }
+
+    .cta-trust {
+      display: flex; justify-content: center;
+      align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+
+    .cta-trust-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 500;
+    }
+
+    /* ══ FOOTER ════════════════════════════════════════════════ */
+    footer {
+      background: var(--ink);
+      padding: 64px 48px 40px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 56px;
+    }
+
+    .footer-brand { }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; margin-bottom: 16px;
+    }
+
+    .footer-logo-mark {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .footer-logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; font-weight: 800;
+      color: white;
+    }
+
+    .footer-tagline {
+      font-size: 13px; color: rgba(255,255,255,0.35);
+      line-height: 1.7; max-width: 240px;
+    }
+
+    .footer-col-title {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 14px; color: rgba(255,255,255,0.35);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+
+    .footer-copy { font-size: 13px; }
+    .footer-made { font-size: 13px; }
+
+    /* ══ ANIMATIONS ════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate { opacity: 0; animation: fadeUp .6s ease forwards; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+    .delay-4 { animation-delay: .4s; }
+    .delay-5 { animation-delay: .5s; }
+
+    /* ══ MOBILE ════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 90px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .dash-mock { display: none; }
+      .proof-bar { padding: 28px 24px; gap: 0; }
+      .proof-item { padding: 16px 24px; border-right: none; border-bottom: 1px solid var(--border); }
+      .proof-item:last-child { border-bottom: none; }
+      .problem-section, .how-section, .faq-section { padding: 64px 24px; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .features-section { padding: 64px 24px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-wrap { grid-template-columns: 1fr 1fr; }
+      .steps-wrap::before { display: none; }
+      .compare-section { padding: 64px 24px; }
+      .compare-head, .compare-row { grid-template-columns: 2fr 1fr 1fr; }
+      .compare-head-cell:nth-child(4), .compare-head-cell:nth-child(5),
+      .compare-row .compare-cell:nth-child(4), .compare-row .compare-cell:nth-child(5) { display: none; }
+      .pricing-section { padding: 64px 24px; }
+      .pricing-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .testimonials-section { padding: 64px 24px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 64px 24px; }
+      footer { padding: 48px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">⚡</div>
+    Service Job Pro
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="https://app.servicejobpro.com/login" class="btn-ghost">Sign In</a>
+    <a href="https://app.servicejobpro.com/login#register" class="btn-primary">Start Free Trial →</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge animate">
+        <span class="hero-badge-dot">⚡</span>
+        Built for Home Service Businesses
+      </div>
+      <h1 class="animate delay-1">
+        Stop Losing Leads.<br>
+        <span class="accent">Close More Jobs.</span><br>
+        Run on <span class="accent-green">Autopilot.</span>
+      </h1>
+      <p class="hero-sub animate delay-2">
+        Service Job Pro automatically follows up with every lead, tracks which ads are making you money, and runs your entire business from one dashboard — starting at $199/month.
+      </p>
+      <div class="hero-actions animate delay-3">
+        <a href="https://app.servicejobpro.com/login#register" class="btn-hero">Start 30-Day Free Trial →</a>
+        <a href="#how" class="btn-hero-outline">▶ See How It Works</a>
+      </div>
+      <div class="hero-trust animate delay-4">
+        <div class="hero-trust-item">
+          <span class="trust-check">✓</span> No credit card required
+        </div>
+        <div class="hero-trust-item">
+          <span class="trust-check">✓</span> Set up in under an hour
+        </div>
+        <div class="hero-trust-item">
+          <span class="trust-check">✓</span> Cancel anytime
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual animate delay-3">
+      <div class="dash-mock">
+        <div class="dash-topbar">
+          <div class="dash-dot dash-dot-r"></div>
+          <div class="dash-dot dash-dot-y"></div>
+          <div class="dash-dot dash-dot-g"></div>
+          <span class="dash-url">app.servicejobpro.com</span>
+        </div>
+        <div class="dash-body">
+          <div class="dash-sidebar">
+            <div class="dash-nav-item active"><span class="dash-nav-dot">📊</span> Dashboard</div>
+            <div class="dash-nav-item"><span class="dash-nav-dot">🎯</span> Leads</div>
+            <div class="dash-nav-item"><span class="dash-nav-dot">📅</span> Calendar</div>
+            <div class="dash-nav-item"><span class="dash-nav-dot">💬</span> Messages</div>
+            <div class="dash-nav-item"><span class="dash-nav-dot">📈</span> Analytics</div>
+            <div class="dash-nav-item"><span class="dash-nav-dot">⚡</span> Automations</div>
+          </div>
+          <div class="dash-content">
+            <div class="dash-stats">
+              <div class="dash-stat">
+                <div class="dash-stat-label">New Leads</div>
+                <div class="dash-stat-val">14</div>
+                <div class="dash-stat-sub">↑ 3 today</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-label">Jobs Booked</div>
+                <div class="dash-stat-val">8</div>
+                <div class="dash-stat-sub" style="color:#7fa4ff">this week</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-label">Revenue</div>
+                <div class="dash-stat-val" style="font-size:18px">$24.8k</div>
+                <div class="dash-stat-sub">↑ month</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-label">Conv Rate</div>
+                <div class="dash-stat-val">34%</div>
+                <div class="dash-stat-sub">↑ 8% avg</div>
+              </div>
+            </div>
+            <div class="dash-leads">
+              <div class="dash-lead-row">
+                <div class="dash-avatar" style="background:#1e3a8a;color:#93c5fd">MJ</div>
+                <div>
+                  <div class="dash-lead-name">Mike Johnson</div>
+                  <div class="dash-lead-svc">Roof Inspection · Facebook</div>
+                </div>
+                <span class="dash-badge badge-hot">HOT</span>
+              </div>
+              <div class="dash-lead-row">
+                <div class="dash-avatar" style="background:#14532d;color:#86efac">SC</div>
+                <div>
+                  <div class="dash-lead-name">Sarah Chen</div>
+                  <div class="dash-lead-svc">HVAC Service · Google</div>
+                </div>
+                <span class="dash-badge badge-won">WON $3,200</span>
+              </div>
+              <div class="dash-lead-row">
+                <div class="dash-avatar" style="background:#3b0764;color:#d8b4fe">RD</div>
+                <div>
+                  <div class="dash-lead-name">Robert Davis</div>
+                  <div class="dash-lead-svc">Plumbing Emergency · Missed Call</div>
+                </div>
+                <span class="dash-badge badge-ai">✨ AI Replied</span>
+              </div>
+              <div class="dash-lead-row">
+                <div class="dash-avatar" style="background:#78350f;color:#fcd34d">TW</div>
+                <div>
+                  <div class="dash-lead-name">Tom Williams</div>
+                  <div class="dash-lead-svc">Lawn Care · Website</div>
+                </div>
+                <span class="dash-badge badge-new">NEW</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-notification">
+        <div class="notif-icon">💰</div>
+        <div>
+          <div class="notif-label">New Conversion</div>
+          <div class="notif-val">$4,800 Roofing Job Won</div>
+        </div>
+      </div>
+      <div class="dash-notification2">
+        <div class="notif2-icon">⚡</div>
+        <div>
+          <div class="notif2-label">Auto-reply sent</div>
+          <div class="notif2-val">Lead responded in 4 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOCIAL PROOF BAR ═══════════════════════════════════════ -->
+<div class="proof-bar">
+  <div class="proof-item">
+    <span class="proof-icon">⚡</span>
+    <div>
+      <div class="proof-val">4 min</div>
+      <div class="proof-label">Avg first response time</div>
+    </div>
+  </div>
+  <div class="proof-item">
+    <span class="proof-icon">📈</span>
+    <div>
+      <div class="proof-val">34%</div>
+      <div class="proof-label">Avg lead conversion rate</div>
+    </div>
+  </div>
+  <div class="proof-item">
+    <span class="proof-icon">💰</span>
+    <div>
+      <div class="proof-val">$47K</div>
+      <div class="proof-label">Avg monthly revenue tracked</div>
+    </div>
+  </div>
+  <div class="proof-item">
+    <span class="proof-icon">🤖</span>
+    <div>
+      <div class="proof-val">24/7</div>
+      <div class="proof-label">Automated lead follow-up</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROBLEM SECTION ════════════════════════════════════════ -->
+<section class="problem-section">
+  <div class="eyebrow">The Problem</div>
+  <h2 class="section-title">Most home service businesses<br>are bleeding leads every day</h2>
+  <p class="section-sub">You work hard to generate leads. But without the right system, most of them slip through the cracks.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-num">78%</div>
+      <div class="problem-title">Leads go to whoever calls first</div>
+      <div class="problem-desc">Studies show 78% of customers hire the first company that responds. If you're not texting back within 5 minutes, you're handing jobs to your competitors.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">$0</div>
+      <div class="problem-title">No idea which ads are working</div>
+      <div class="problem-desc">You're spending money on Facebook and Google but can't tell which campaigns are actually generating revenue. You're flying blind with your ad budget.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">3hrs</div>
+      <div class="problem-title">Wasted on admin every day</div>
+      <div class="problem-desc">Manual follow-ups, scheduling, review requests, and tracking leads across spreadsheets eats hours you should spend on the job site or with your family.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ═══════════════════════════════════════════════ -->
+<section class="features-section" id="features">
+  <div class="features-bg"></div>
+  <div class="features-inner">
+    <div class="eyebrow">Everything You Need</div>
+    <h2 class="section-title">Built for the way home<br>service businesses actually work</h2>
+    <p class="section-sub">Not a generic CRM adapted for home services — built from the ground up for roofing, HVAC, plumbing, lawn care, and more.</p>
+
+    <div class="features-grid">
+      <div class="feature-cell" style="grid-column: span 2">
+        <span class="feature-cell-icon">⚡</span>
+        <div class="feature-cell-name">AI-Powered Lead Follow-Up</div>
+        <div class="feature-cell-desc">The moment a new lead comes in, Service Job Pro sends a personalized text automatically — even at 2am on a Sunday. Our AI reads the lead's name, service, and source to craft a message that sounds like you wrote it yourself. Leads that get a reply within 5 minutes are 9x more likely to convert.</div>
+        <span class="feature-cell-tag">✨ AI Included</span>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">📣</span>
+        <div class="feature-cell-name">Ad Campaign ROI Tracker</div>
+        <div class="feature-cell-desc">See exactly which Facebook and Google campaigns are generating leads, conversions, and revenue. Know your cost per lead and return on ad spend for every campaign in real time.</div>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">💬</span>
+        <div class="feature-cell-name">Two-Way SMS Inbox</div>
+        <div class="feature-cell-desc">All your customer text conversations in one place. Reply from the app, let AI suggest responses, or let automation handle routine follow-ups entirely.</div>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">📅</span>
+        <div class="feature-cell-name">Scheduling & Calendar</div>
+        <div class="feature-cell-desc">Book appointments, send automatic reminders, and manage your schedule across month, week, day, and list views. Reduce no-shows with automated reminder texts.</div>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">🎯</span>
+        <div class="feature-cell-name">Lead Pipeline Management</div>
+        <div class="feature-cell-desc">Track every lead from first contact to closed job. Visual status flow — New, Contacted, Booked, Converted — so you always know exactly where every opportunity stands.</div>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">📚</span>
+        <div class="feature-cell-name">Automation Playbooks</div>
+        <div class="feature-cell-desc">6 pre-built automation sequences — new lead follow-up, appointment reminders, post-job review requests, estimate follow-up, re-engagement, and storm response. Install in one click.</div>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">⭐</span>
+        <div class="feature-cell-name">Review Request Automation</div>
+        <div class="feature-cell-desc">Send automated review requests after every completed job. Businesses using this feature average 4.7+ stars on Google. Your reputation is your best salesperson.</div>
+        <span class="feature-cell-tag">Most Popular</span>
+      </div>
+      <div class="feature-cell">
+        <span class="feature-cell-icon">🌐</span>
+        <div class="feature-cell-name">Facebook & Google Integration</div>
+        <div class="feature-cell-desc">Connect your Facebook Lead Ads and Google lead forms directly to Service Job Pro. New leads from your ads land in your dashboard automatically within seconds.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ═══════════════════════════════════════════ -->
+<section class="how-section" id="how">
+  <div class="eyebrow">How It Works</div>
+  <h2 class="section-title">Up and running in under an hour</h2>
+  <p class="section-sub">We handle the setup so you can focus on what you do best.</p>
+
+  <div class="steps-wrap">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Sign Up & Connect</div>
+      <div class="step-desc">Create your account. We set up your dedicated SMS business line and connect your lead sources for you.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Install Your Playbooks</div>
+      <div class="step-desc">Pick from 6 pre-built automation sequences and install them in one click. Your follow-up system is live immediately.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Leads Come In Automatically</div>
+      <div class="step-desc">Facebook leads, Google leads, website inquiries, and missed calls all flow into your dashboard automatically.</div>
+    </div>
+    <div class="step">
+      <div class="step-num done">✓</div>
+      <div class="step-title">Win More Jobs</div>
+      <div class="step-desc">The system follows up, books appointments, and tracks every dollar — while you're on the job site doing what you love.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPARISON TABLE ════════════════════════════════════════ -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <div class="eyebrow">How We Compare</div>
+    <h2 class="section-title">Everything competitors charge extra for — included.</h2>
+
+    <div class="compare-table">
+      <div class="compare-head">
+        <div class="compare-head-cell" style="text-align:left">Feature</div>
+        <div class="compare-head-cell ours">
+          <div class="compare-head-ours-badge">Best Value</div>
+          <div>Service Job Pro</div>
+        </div>
+        <div class="compare-head-cell">GoHighLevel</div>
+        <div class="compare-head-cell">Jobber</div>
+        <div class="compare-head-cell">Housecall Pro</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">AI Lead Follow-Up</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell"><span class="compare-partial">Add-on</span></div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Ad Campaign ROI Tracking</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Two-Way SMS Included</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell"><span class="compare-partial">Extra cost</span></div>
+        <div class="compare-cell"><span class="compare-partial">Limited</span></div>
+        <div class="compare-cell">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Automation Playbooks</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell">✓</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Facebook & Google Lead Sync</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell">✓</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">White-Glove Onboarding</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell compare-x">✗</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Built for Home Services</div>
+        <div class="compare-cell ours">✓</div>
+        <div class="compare-cell compare-x">✗</div>
+        <div class="compare-cell">✓</div>
+        <div class="compare-cell">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feature">Starting Price</div>
+        <div class="compare-cell ours" style="font-size:14px">$199/mo</div>
+        <div class="compare-cell" style="font-size:13px;color:var(--muted)">$97/mo*</div>
+        <div class="compare-cell" style="font-size:13px;color:var(--muted)">$49/mo*</div>
+        <div class="compare-cell" style="font-size:13px;color:var(--muted)">$59/mo*</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">* Competitors require additional paid add-ons for AI, SMS, and advanced automations.</p>
+  </div>
+</section>
+
+<!-- ══ PRICING ════════════════════════════════════════════════ -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="eyebrow">Pricing</div>
+    <h2 class="section-title">Simple pricing that scales with you</h2>
+    <p class="section-sub">One job closed from a lead you would have lost pays for months of Service Job Pro. Start free — no credit card required.</p>
+
+    <div class="pricing-toggle">
+      <button class="toggle-btn active" onclick="setPricing('monthly',this)">Monthly</button>
+      <button class="toggle-btn" onclick="setPricing('annual',this)">Annual <span style="color:var(--green);font-size:11px">Save 20%</span></button>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="plan-tier">Starter</div>
+        <div class="plan-name">Solo</div>
+        <div class="plan-tagline">For 1-2 person operations just getting started with a CRM.</div>
+        <div class="plan-price-wrap">
+          <span class="plan-dollar">$</span>
+          <span class="plan-price" id="price-1">199</span>
+        </div>
+        <div class="plan-period">/month · billed monthly</div>
+        <div class="plan-save" id="save-1">&nbsp;</div>
+        <a href="https://app.servicejobpro.com/login#register" class="plan-cta plan-cta-outline">Start Free Trial</a>
+        <hr class="plan-divider">
+        <div class="plan-features">
+          <div class="plan-feature"><span class="plan-check">✓</span> 1 user account</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> 500 leads/month</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> SMS included</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> 3 automation sequences</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> AI Draft & Suggest Replies</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Facebook & Google sync</div>
+          <div class="plan-feature"><span class="plan-cross">✗</span> Campaign ROI tracker</div>
+          <div class="plan-feature"><span class="plan-cross">✗</span> Priority support</div>
+        </div>
+      </div>
+
+      <!-- Growth -->
+      <div class="pricing-card popular">
+        <div class="popular-pill">Most Popular</div>
+        <div class="plan-tier">Growth</div>
+        <div class="plan-name">Team</div>
+        <div class="plan-tagline">For established businesses with a team ready to scale fast.</div>
+        <div class="plan-price-wrap">
+          <span class="plan-dollar">$</span>
+          <span class="plan-price" id="price-2">399</span>
+        </div>
+        <div class="plan-period">/month · billed monthly</div>
+        <div class="plan-save" id="save-2">&nbsp;</div>
+        <a href="https://app.servicejobpro.com/login#register" class="plan-cta plan-cta-blue">Start Free Trial</a>
+        <hr class="plan-divider">
+        <div class="plan-features">
+          <div class="plan-feature"><span class="plan-check">✓</span> 5 user accounts</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> 2,000 leads/month</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> SMS included</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Unlimited sequences</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> AI Draft & Suggest Replies</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> All 6 playbooks</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Campaign ROI tracker</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Priority support + onboarding call</div>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card">
+        <div class="plan-tier">Pro</div>
+        <div class="plan-name">Business</div>
+        <div class="plan-tagline">For high-volume operations with a dedicated account manager.</div>
+        <div class="plan-price-wrap">
+          <span class="plan-dollar">$</span>
+          <span class="plan-price" id="price-3">799</span>
+        </div>
+        <div class="plan-period">/month · billed monthly</div>
+        <div class="plan-save" id="save-3">&nbsp;</div>
+        <a href="https://app.servicejobpro.com/login#register" class="plan-cta plan-cta-outline">Start Free Trial</a>
+        <hr class="plan-divider">
+        <div class="plan-features">
+          <div class="plan-feature"><span class="plan-check">✓</span> 15 user accounts</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Unlimited leads</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Everything in Growth</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Custom playbooks built for you</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Monthly strategy call</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Dedicated account manager</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Custom integrations</div>
+          <div class="plan-feature"><span class="plan-check">✓</span> Same-day support</div>
+        </div>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card" style="background:var(--ink);border-color:var(--ink2)">
+        <div class="plan-tier" style="color:rgba(255,255,255,0.4)">Enterprise</div>
+        <div class="plan-name" style="color:white">Multi-Location</div>
+        <div class="plan-tagline" style="color:rgba(255,255,255,0.4)">For large operations and multi-location businesses with complex needs.</div>
+        <div class="plan-price-wrap">
+          <span class="plan-dollar" style="color:white">$</span>
+          <span class="plan-price" style="color:white" id="price-4">1,500</span>
+        </div>
+        <div class="plan-period" style="color:rgba(255,255,255,0.35)">/month · starting price</div>
+        <div class="plan-save" id="save-4">&nbsp;</div>
+        <a href="mailto:hello@servicejobpro.com" class="plan-cta plan-cta-dark" style="background:rgba(255,255,255,0.1);color:white">Contact Us</a>
+        <hr class="plan-divider" style="border-color:rgba(255,255,255,0.08)">
+        <div class="plan-features">
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">Unlimited users</span></div>
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">Multiple locations</span></div>
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">Everything in Pro</span></div>
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">White-label option</span></div>
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">Weekly strategy calls</span></div>
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">SLA guarantee</span></div>
+          <div class="plan-feature"><span class="plan-check">✓</span> <span style="color:rgba(255,255,255,0.6)">Custom development</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══════════════════════════════════════════ -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="eyebrow">Real Results</div>
+    <h2 class="section-title">Home service businesses<br>winning with Service Job Pro</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-result">
+          <div class="testimonial-result-val">+$18K</div>
+          <div class="testimonial-result-label">first month</div>
+        </div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">"Before Service Job Pro I was losing leads because I couldn't respond fast enough. Now the system texts back <strong>automatically</strong> and I'm closing jobs I never even knew I had. Made back my subscription cost in the first week."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#dbeafe;color:#1e40af">MR</div>
+          <div>
+            <div class="testimonial-name">Mike Rodriguez</div>
+            <div class="testimonial-biz">Rodriguez Roofing · Tampa, FL</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-result">
+          <div class="testimonial-result-val">34%</div>
+          <div class="testimonial-result-label">conv rate</div>
+        </div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">"The campaign tracker is a game changer. I found out my Facebook ads were <strong>3x more profitable</strong> than Google and shifted my budget immediately. Never could have figured that out without Service Job Pro."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#dcfce7;color:#15803d">JT</div>
+          <div>
+            <div class="testimonial-name">Jennifer Torres</div>
+            <div class="testimonial-biz">Elite HVAC Services · Orlando, FL</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-result">
+          <div class="testimonial-result-val">4.9⭐</div>
+          <div class="testimonial-result-label">Google rating</div>
+        </div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">"The review request automation took us from 12 reviews to <strong>over 200</strong> in three months. Our Google rating went from 4.1 to 4.9. We get more calls from Google now than from any of our ads."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#fef9c3;color:#854d0e">DB</div>
+          <div>
+            <div class="testimonial-name">David Brooks</div>
+            <div class="testimonial-biz">Brooks Plumbing · Atlanta, GA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ════════════════════════════════════════════════════ -->
+<section class="faq-section" id="faq">
+  <div class="eyebrow">FAQ</div>
+  <h2 class="section-title">Common questions</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do I need to set up Twilio or any technical integrations myself?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">No. We handle everything. Your dedicated SMS business line is set up by our team. Your Facebook and Google lead forms get connected for you. You just log in and start working leads. Most customers are live within one business day.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can my existing customers text my new business number?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Yes. Your Service Job Pro business number is a real phone number that sends and receives texts like any other. You can forward calls to your existing phone, and texts are managed through the Service Job Pro app. Many customers also port their existing business number to us so their clients see the same number they always have.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How does the AI follow-up work exactly?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">When a new lead comes in — from Facebook, Google, your website, or a missed call — the system can automatically send a personalized text message using the lead's name, the service they requested, and how they found you. You can also use AI Draft to write a message in seconds and review it before sending. All AI messages are powered by Claude AI and sound natural, not robotic.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What home service businesses does this work best for?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Service Job Pro works for any home service business that generates leads and books jobs — roofing, HVAC, plumbing, electrical, lawn care, landscaping, pest control, painting, flooring, windows, gutters, and more. If you get leads and book jobs, this system is built for you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What happens after my 30-day free trial?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">At the end of your trial, you choose a plan and your account continues without interruption. If you decide not to continue, your account pauses — we never delete your data. All your leads, clients, automations, and settings are preserved if you return later. No surprises.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I cancel anytime?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Yes, absolutely. No contracts, no cancellation fees. Cancel any time from your account settings. We think you'll stay because the system delivers results — not because you're locked in.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA SECTION ════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-grid-lines"></div>
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Ready to Close More Jobs?</div>
+    <h2 class="cta-title">Start your free 30-day trial today.<br>No credit card required.</h2>
+    <p class="cta-sub">Join home service businesses across the country that are closing more jobs, wasting less time, and actually knowing their ad ROI.</p>
+    <div class="cta-actions">
+      <a href="https://app.servicejobpro.com/login#register" class="btn-cta-white">Start Free Trial — It's Free →</a>
+      <a href="mailto:hello@servicejobpro.com" class="btn-cta-ghost">Talk to Us First</a>
+    </div>
+    <div class="cta-trust">
+      <div class="cta-trust-item">✓ No credit card required</div>
+      <div class="cta-trust-item">✓ Full access for 30 days</div>
+      <div class="cta-trust-item">✓ We set everything up for you</div>
+      <div class="cta-trust-item">✓ Cancel anytime</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <div class="footer-logo-mark">⚡</div>
+          <span class="footer-logo-text">Service Job Pro</span>
+        </a>
+        <p class="footer-tagline">The CRM built from the ground up for home service businesses. Track every job. Close more work.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <div class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#how">How It Works</a>
+          <a href="https://app.servicejobpro.com/login#register">Start Free Trial</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Industries</div>
+        <div class="footer-links">
+          <a href="#">Roofing</a>
+          <a href="#">HVAC</a>
+          <a href="#">Plumbing</a>
+          <a href="#">Lawn & Landscaping</a>
+          <a href="#">Electrical</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="mailto:hello@servicejobpro.com">Contact Us</a>
+          <a href="https://app.servicejobpro.com/login">Sign In</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 USA America LLC. All rights reserved.</div>
+      <div class="footer-made">Powered by <a href="https://usaamerica.co" style="color:rgba(255,255,255,0.4);text-decoration:none">USA America LLC</a> · Designed by J Tackett</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Pricing toggle ──────────────────────────────────────────
+  const prices = {
+    monthly: { p1:199, p2:399, p3:799, p4:1500, s1:'', s2:'', s3:'', s4:'' },
+    annual:  { p1:159, p2:319, p3:639, p4:1200,
+               s1:'Save $480/yr', s2:'Save $960/yr', s3:'Save $1,920/yr', s4:'Save $3,600/yr' }
+  };
+
+  function setPricing(mode, btn) {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const d = prices[mode];
+    document.getElementById('price-1').textContent = d.p1.toLocaleString();
+    document.getElementById('price-2').textContent = d.p2.toLocaleString();
+    document.getElementById('price-3').textContent = d.p3.toLocaleString();
+    document.getElementById('price-4').textContent = d.p4.toLocaleString();
+    document.getElementById('save-1').textContent = d.s1;
+    document.getElementById('save-2').textContent = d.s2;
+    document.getElementById('save-3').textContent = d.s3;
+    document.getElementById('save-4').textContent = d.s4;
+    document.getElementById('save-2').style.color = mode === 'annual' ? 'var(--green)' : 'transparent';
+    const periods = document.querySelectorAll('.plan-period');
+    periods.forEach(p => { if (!p.closest('.pricing-card:last-child')) p.textContent = '/month · billed ' + mode; });
+  }
+
+  // ── FAQ toggle ──────────────────────────────────────────────
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // ── Scroll animations ───────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.problem-card, .feature-cell, .step, .pricing-card, .testimonial-card, .faq-item, .compare-row').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+
+  // Stagger children in grids
+  document.querySelectorAll('.problem-grid, .pricing-grid, .testimonials-grid').forEach(grid => {
+    Array.from(grid.children).forEach((child, i) => {
+      child.style.transitionDelay = (i * 0.08) + 's';
+    });
+  });
+</script>
+</body>
+</html>
